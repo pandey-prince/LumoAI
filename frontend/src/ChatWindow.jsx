@@ -3,8 +3,12 @@ import Chat from "./Chat.jsx";
 import { MyContext } from "./MyContext.jsx";
 import { useContext, useState, useEffect, useCallback } from "react";
 import { ScaleLoader } from "react-spinners";
+const BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
+
+
 
 function ChatWindow() {
+
   const {
     prompt,
     setPrompt,
@@ -26,7 +30,7 @@ function ChatWindow() {
     setNewChat(false);
 
     try {
-      const response = await fetch("http://localhost:3000/api/chat", {
+      const response = await fetch(`${BACKEND_URI}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -2,8 +2,10 @@ import "./Sidebar.css";
 import { useContext, useEffect, useState } from "react";
 import { MyContext } from "./MyContext.jsx";
 import { v1 as uuidv1 } from "uuid";
+const BACKEND_URI = import.meta.env.VITE_BACKEND_URI;
 
 function Sidebar() {
+  
   const {
     allThreads,
     setAllThreads,
@@ -22,7 +24,7 @@ function Sidebar() {
   const getAllThreads = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/api/thread");
+      const response = await fetch(`${BACKEND_URI}/api/thread`);
       if (!response.ok) throw new Error("Failed to fetch threads");
 
       const data = await response.json();
@@ -67,14 +69,14 @@ function Sidebar() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/thread/${newThreadId}`
+        `${BACKEND_URI}/api/thread/${newThreadId}`
       );
       if (!response.ok) throw new Error("Failed to load thread messages");
 
       const messages = await response.json();
       setPrevChats(messages);
     } catch (err) {
-      console.error("❌ Error loading thread:", err.message);
+      console.error(" Error loading thread:", err.message);
     }
   };
 
@@ -82,7 +84,7 @@ function Sidebar() {
   const deleteThread = async (threadId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/thread/${threadId}`,
+        `${BACKEND_URI}/api/thread/${threadId}`,
         { method: "DELETE" }
       );
       if (!response.ok) throw new Error("Failed to delete thread");
@@ -94,7 +96,7 @@ function Sidebar() {
         createNewChat();
       }
     } catch (err) {
-      console.error("❌ Error deleting thread:", err.message);
+      console.error("Error deleting thread:", err.message);
     }
   };
 
