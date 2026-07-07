@@ -1,28 +1,31 @@
 # LumoAI
 
-An AI-powered full-stack application that leverages artificial intelligence to provide intelligent solutions and interactions.
+A ChatGPT-style AI chat assistant powered by **Google Gemini 2.5 Flash**. Ask anything, hold multi-turn conversations, and revisit past chats saved as persistent threads.
 
 ## Live Demo
 
 [https://lumo-ai-xi.vercel.app](https://lumo-ai-xi.vercel.app)
 
+![LumoAI chat interface](docs/lumoai-home.png)
+
 ## Tech Stack
 
 **Frontend:**
-- React.js
-- JavaScript
-- Modern UI/UX
+- React.js (Vite)
+- Modern, responsive chat UI
 
 **Backend:**
-- Node.js/Express
-- RESTful API
+- Node.js / Express (REST API)
+- Google Gemini (`@google/genai`, model `gemini-2.5-flash`)
+- MongoDB + Mongoose for persistent chat threads
 
 ## Features
 
-- AI-powered functionality
-- Modern and responsive UI
-- Real-time interactions
-- Secure and scalable architecture
+- **Conversational AI** powered by Google Gemini 2.5 Flash
+- **Persistent chat threads** — each conversation is stored with its message history and title
+- **Multi-turn chat** with user/assistant message roles
+- **Clean, ChatGPT-like interface** that is fully responsive
+- REST API separating the chat/thread logic from the UI
 
 ## Project Structure
 
@@ -61,8 +64,11 @@ npm install
 ```
 
 4. Set up environment variables:
-   - Create `.env` files in both backend and frontend directories
-   - Add necessary API keys and configuration
+   - In `backend/.env` add:
+     - `GEMINI_API_KEY` — your Google Gemini API key (from Google AI Studio)
+     - `MONGODB_URI` — your MongoDB connection string
+     - `PORT` — backend port (optional)
+   - In `frontend/.env` add the backend API URL if required by the client
 
 5. Run the development servers:
 
